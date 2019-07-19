@@ -31,6 +31,7 @@
 		}
 		
 		document.getElementById("userId").value = userId;
+		System.out.println("황선희");
 		
 	}
 	
