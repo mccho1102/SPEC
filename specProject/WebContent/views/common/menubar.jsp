@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@page import="member.model.vo.Member"%>
+<%
+	Member loginUser = (Member)session.getAttribute("loginUser");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -26,6 +30,7 @@
 		font-family: 'Noto Sans KR', sans-serif;
 		font-size: 12px;
 		padding: 10px 20px;
+		margin: 0 0 0 10px;
 	}
 	#hshUserId, #hshUserPw {
 		border-radius: 3px;
@@ -139,6 +144,8 @@
 			</div>
 		</div>
 		</form>
+	</div>
+	<% if ( loginUser == null ) { %>
 		<div class="hshLogin" >
 			<form action="<%=request.getContextPath()%>/hshLogin.me" method="POST" id="hshLoginForm" onsubmit="return loginCheck();">
 				<table>
@@ -163,8 +170,11 @@
 				</table>
 			</form>
 		</div>
-	</div>
-	
+	<% } else { %>
+		<div class="hshLogin">
+			
+		</div>
+	<% } %>
 	<script>
 		// 1.2 로그인 유효성 검사
 		function validate(){
@@ -185,8 +195,19 @@
 			return true;
 		}
 		
-	
-
+		function loginCheck(){
+			if($("#hshUserId").val().trim().length==0) {
+				alert("아이디를 입력하세요");
+				$("#hshUserId").focus();
+				return false;
+			} else if($("#hshUserPw").val().trim().length==0) {
+				alert("비밀번호를 입력하세요");
+				$("#hshUserPw").focus();
+				return false;
+			} else {
+				return true;
+			}
+		}
 	</script>
 </body>
 </html>
