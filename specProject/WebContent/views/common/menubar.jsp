@@ -31,6 +31,7 @@
 		font-size: 12px;
 		padding: 10px 20px;
 		margin: 0 0 0 10px;
+		width: 215px;
 	}
 	#hshUserId, #hshUserPw {
 		border-radius: 3px;
@@ -172,7 +173,9 @@
 		</div>
 	<% } else { %>
 		<div class="hshLogin">
-			
+			<br><label id="welcomeUser"><span><%=loginUser.getName()%></span> 님 환영합니다!</label><br><br>
+			<button type="button" onclick="HshUserInfo();" class="btn btn-info btn-sm">MY INFO</button>
+			<button type="button" onclick="location.href='<%=request.getContextPath()%>/hshLogout.me'" class="btn btn-primary btn-sm">LOGOUT</button>			
 		</div>
 	<% } %>
 	<script>
@@ -181,17 +184,13 @@
 			if($("#userId").val().trim().length == 0){
 				alert("아이디를 입력하세요");
 				$("#userId").focus();
-				
 				return false;
 			}
-			
 			if($("#userPwd").val().trim().length == 0){
 				alert("비밀번호를 입력해주세요");				
 				$("#userPwd").focus();
-				
 				return false;
 			}
-			
 			return true;
 		}
 		
@@ -207,6 +206,9 @@
 			} else {
 				return true;
 			}
+		}
+		function HshUserInfo() {
+			window.open("/views/member/HshMyInfo.jsp", "hshMyInfo", "width=500px, height=700px, left=400px, top=200px, resizable=no");
 		}
 	</script>
 </body>
